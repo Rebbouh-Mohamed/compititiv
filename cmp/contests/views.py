@@ -29,7 +29,7 @@ class JoinContestView(APIView):
 
         # Check if the user has already joined the contest
         if ContestParticipation.objects.filter(user=user, contest=contest).exists():
-            return Response({"error": "You have already joined this contest."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "You have already joined this contest."}, status=status.HTTP_201_CREATED)
 
         # Create a new participation record
         participation = ContestParticipation.objects.create(user=user, contest=contest)

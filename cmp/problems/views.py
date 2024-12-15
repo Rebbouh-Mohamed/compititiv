@@ -26,7 +26,6 @@ class ContestProblemsView(APIView):
             response_data.append({
                 "id": problem.id,
                 "title": problem.title,
-                "points": problem.points,
                 "level": problem.level,
                 "submitted": submission_status,
                 "percentage": submission.percentage if submission else 0,
