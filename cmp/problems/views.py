@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import Contest, Problem,TestCase
 from .serializers import ProblemSerializer
 from django.shortcuts import get_object_or_404
+from django.utils.timezone import now
 from submissions.models import Submission
 from rest_framework.permissions import IsAuthenticated 
 import requests
@@ -11,10 +12,11 @@ import requests
 class ContestProblemsView(APIView):
     permission_classes = [IsAuthenticated]  # Ensure only logged-in users can access
 
-    def get(self, request, contest_id):
+    def get(self, request):
         # Fetch the contest
-        contest = get_object_or_404(Contest, id=contest_id)
-
+        contest = Contest.objects.filter(start_time__lte=now(), end_time__gt=now()).first()
+        if not contest:
+            return Response({"error": "No active contest found."}, status=status.HTTP_404_NOT_FOUND)
         # Fetch all problems for this contest
         all_problems = Problem.objects.filter(contest=contest)
 # Build response data with submission status and percentage

@@ -1,12 +1,12 @@
 # end points :
 ## contests:
-### 1. api/contests/int:contest_id/join/ :post this for join a contest:
-
+### 1. api/contests/int:contest_id/join/ :post this for join a contest
+    
 ### 2. api/contests/int:contest_id/participants/: get joining User to a contest
 ### 3. api/contests/upcontest/: get the first coming contest 
 
 ## problems:
-### 1. api/problems/int:contest_id/problems/:get probelms from contest
+### 1. api/problems/problems/:get probelms from contest
 ### 2. api/problems/int:problem_id/ :get specific  problem
 ### 3. api/problems/int:problem_title/ :get specific  problem
 
@@ -46,7 +46,7 @@ respond :
 }
 ```
 ## board:
-### 1.api/board/contest_id/:get dashboard with of contest with id
+### 1.api/board/contest_id/ :get dashboard with of contest with id
 
 ## condigspace:
 ### 2.api/codingspace/problem_id/language/:post a default code for problem based on language chosen  
