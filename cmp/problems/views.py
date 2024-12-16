@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
 from submissions.models import Submission
 from rest_framework.permissions import IsAuthenticated 
+from codingspace.models import DefaultCode
 import requests
 
 class ContestProblemsView(APIView):
@@ -23,6 +24,10 @@ class ContestProblemsView(APIView):
         response_data = []
         for problem in all_problems:
             submission = Submission.objects.filter(problem=problem).first()
+            try :
+                code=get_object_or_404(DefaultCode,problem=problem,language='JS') 
+            except:
+                code=None
             submission_status = bool(submission) 
             # Calculate percentage (assuming `problem.points` defines full points)
             response_data.append({
@@ -31,6 +36,10 @@ class ContestProblemsView(APIView):
                 "level": problem.level,
                 "submitted": submission_status,
                 "percentage": submission.percentage if submission else 0,
+                "description":problem.description,
+                "input_desc":problem.input_description,
+                "output_desc":problem.output_description,
+                "codejs":code.code_snippet if code else ""
             })
         return Response(response_data, status=status.HTTP_200_OK)
     
