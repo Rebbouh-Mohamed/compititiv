@@ -3,13 +3,13 @@ from problems.models import Problem
 # Create your models here.
 class DefaultCode(models.Model):
     LANGUAGE_CHOICES = [
-        ('C', 'C'),
-        ('CPP', 'C++'),
-        ('CS', 'C#'),
-        ('JAVA', 'Java'),
-        ('JS', 'JavaScript'),
-        ('PY', 'Python'),
-        ('GO', 'Go'),
+        ('c', 'C'),
+        ('cpp', 'C++'),
+        ('cs', 'C#'),
+        ('java', 'Java'),
+        ('js', 'JavaScript'),
+        ('py', 'Python'),
+        ('go', 'Go'),
     ]
 
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES)  # Language choice

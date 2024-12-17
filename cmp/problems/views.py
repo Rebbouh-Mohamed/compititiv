@@ -70,7 +70,6 @@ class TestProblem(APIView):
 
         code = request.data.get("code")
         language = request.data.get("language")
-        
         if not code:
             return Response({"error": "Code is required."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -86,13 +85,12 @@ class TestProblem(APIView):
                 "language": language,
                 "input": test.input_data,  # Input: string and number
             }
-
+            print(data)
             try:
                 # Make a POST request to the Codex API
                 response = requests.post(api, json=data)
                 response.raise_for_status()  # Raise exception for HTTP errors
                 response_data = response.json()
-
                 output = response_data.get("output", "").strip()
                 if test.expected_output == output:
                     passed += 1 
@@ -101,7 +99,6 @@ class TestProblem(APIView):
 
 
         percentage = passed / len(test_cases) *100 if test_cases else 0
-
 
 
         # Return the response with submission details
