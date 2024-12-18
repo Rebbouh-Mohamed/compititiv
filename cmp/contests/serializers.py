@@ -14,7 +14,6 @@ class ContestSerializer(serializers.ModelSerializer):
 
 class ContestParticipationSerializer(serializers.ModelSerializer):
     user = UserSerializer()  # Nested representation of the user
-
     class Meta:
         model = ContestParticipation
         fields = ['id', 'user','pionts']

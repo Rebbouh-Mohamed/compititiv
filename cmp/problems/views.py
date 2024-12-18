@@ -85,7 +85,6 @@ class TestProblem(APIView):
                 "language": language,
                 "input": test.input_data,  # Input: string and number
             }
-            print(data)
             try:
                 # Make a POST request to the Codex API
                 response = requests.post(api, json=data)
