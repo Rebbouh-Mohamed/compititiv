@@ -14,6 +14,9 @@ class Problem(models.Model):
     description = models.TextField()
     input_description = models.TextField(default="")
     output_description = models.TextField(default="")
+    constraint=models.TextField(default="")
+    input_exp=models.TextField(default="")
+    output_exp=models.TextField(default="")
     contest = models.ForeignKey(
         Contest, on_delete=models.CASCADE, related_name="problems"
     )  # Problem belongs to a contest

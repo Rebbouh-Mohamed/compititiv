@@ -39,6 +39,9 @@ class ContestProblemsView(APIView):
                 "description":problem.description,
                 "input_desc":problem.input_description,
                 "output_desc":problem.output_description,
+                "constraint":problem.constraint,
+                "input_exp":problem.input_exp,
+                "output_exp":problem.output_exp,
                 "codejs":code.code_snippet if code else ""
             })
         return Response(response_data, status=status.HTTP_200_OK)
