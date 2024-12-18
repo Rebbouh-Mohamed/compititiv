@@ -29,3 +29,4 @@ class GetDefaultCode(APIView):
 
         # Return the serialized data with HTTP 200 status
         return Response(data=serializer.data, status=HTTP_200_OK)
+    
