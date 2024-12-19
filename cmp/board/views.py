@@ -17,7 +17,6 @@ class LeaderBoard(APIView):
         contest = Contest.objects.filter(end_time__gte=now(),start_time__lte=now()).first()  # Active contest
         if not contest:
             contest = Contest.objects.filter(end_time__lt=now()).order_by("-end_time").first()  # Last ended contest
-            print("contets",contest.title)
         if not contest:
             return Response({"error": "No active or ended contests found!"}, status=HTTP_404_NOT_FOUND)
 

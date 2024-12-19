@@ -39,15 +39,16 @@ class JoinContestView(APIView):
 
 
 class ContestParticipantsView(APIView):
-    def get(self, request, contest_id):
-        try:
-            contest = Contest.objects.get(id=contest_id)
-        except Contest.DoesNotExist:
-            return Response({"error": "Contest not found."}, status=status.HTTP_404_NOT_FOUND)
-
-        participations = ContestParticipation.objects.filter(contest=contest)
-        serializer = ContestParticipationSerializer(participations, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def get(self, request):
+        # Get all users who are not admins
+        non_admin_users = User.objects.filter(is_staff=False, is_superuser=False)
+        
+        # Serialize the users' data (you can use a custom serializer here)
+        # For simplicity, we'll serialize just their usernames and emails
+        user_data = [{"username": user.username, "email": user.email} for user in non_admin_users]
+        
+        # Return the response with the user data
+        return Response(user_data, status=status.HTTP_200_OK)
 
 
 class UpContestOrComingUpContestView(APIView):
